@@ -1,3 +1,25 @@
+## README for dmendres forked repository, original README follows
+This repository contains the files produced to meet the specifications 
+for the first course project in the Exporing Data Coursera course exdata-031.
+
+### Solution approach
+Reading the specifications and grading rubrics closely, I have chosen to attempt to match the model plots character-for-character. E.g., in Plot 2, the y-label (ylab) is "Global Active Power (kilowatts)", but in Plot 4, the corresponding sub-plot has a different y-label (the units are elided). Another example is the unfortunate x-label in the two new sub-plots of Plot 4, in which "datetime" column name for the combined date/time is exposed, despite the poor aesthetics of that label.
+
+### Source files
+This repository contains **5** R script files. I chose **not** to repeat the IO and pre-processing for each plot, but the project specifications specify that each plot file should read the data. Therefore, hpcPrepAndPlot.R loads, preps, and plots the data. The load and prep is performed in a function titled loadPrepHPC, which is invoked in cacheHPC. CacheHPC is passed a 4-(function) member list that manages a cache of file name and the loaded & prepped data table. When the cache is empty, cacheHPC invokes the load etc. The resulting data table is cached and re-used. The other 4 R script files define the individual plot functions, Plot1.R, Plot2.R, Plot3.R, Plot4.R. The functions plot2 and plot3 are also used to create sub-plots of Plot4. Note that minor differences in the appearance of plots 2 and 3 when re-used as sub-plots require a flag, also used to indicate that the sub-plot doesn't need to open the PNG device.
+The entire processing flow is as follows, driven by hpcPrepAndPlot.R script:
+
+1. Load necessary libraries (data.table)
+
+2. Preserve and set working directory.
+
+3. Load the plotting functions.
+
+4. Initialize the cache (cache empty, but with the desired file name).
+
+5. Generate each plot. The first plot loads the cache. The plots are straight forward use of the base plotting package functions hist, plot, line and legend, except for the minor variations in plots 2 and 3 when used as sub-plots. Plot4 invokes specific functions for each sub-plot after configuring the plot device for 2 X 2 sub-plots.
+
+
 ## Introduction
 
 This assignment uses data from
